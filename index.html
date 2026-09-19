@@ -156,7 +156,7 @@ const $=id=>document.getElementById(id);
 const today=new Date(),isoToday=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
 let pending=[],records=[],branches=[],users=[],currentUser=null,currentProfile=null,branchUnsub=null,recordUnsub=null,userUnsub=null;
 let db=null,storage=null,auth=null,secondaryApp=null;
-const firebaseConfig={apiKey:"AIzaSyAZfnffu_MWwWUMYr8g_7EqRGAZer4OTExI",authDomain:"fnbpos-471fa.firebaseapp.com",projectId:"fnbpos-471fa",storageBucket:"fnbpos-471fa.firebasestorage.app",messagingSenderId:"858326639611",appId:"1:858326639611:web:751047845052cab42ee15e",measurementId:"G-199DDNKYM3"};
+const firebaseConfig={apiKey:"AIzaSyBuKjG80eGqMndimmUcrwgnb0FYi1bjr5I",authDomain:"internaldochoki.firebaseapp.com",projectId:"internaldochoki",storageBucket:"internaldochoki.firebasestorage.app",messagingSenderId:"391358235359",appId:"1:391358235359:web:6bec021bf7292b00275f6a",measurementId:"G-NEFNDBSZ4Q"};
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function toast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',2500);}
 function fmt(n){return n<1024*1024?(n/1024).toFixed(0)+' KB':(n/1024/1024).toFixed(2)+' MB';}
