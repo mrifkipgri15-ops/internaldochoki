@@ -1,242 +1,55 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Document Combine Manager V3 Firebase</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Document Combine Manager V5 - Simple Login</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f6f7fb;color:#24232a}
-header{background:linear-gradient(135deg,#f7c5dc,#cfeede);padding:22px 16px;border-bottom:1px solid #ddd}
-.container{max-width:1200px;margin:auto}.brand{font-size:24px;font-weight:800}.sub{margin-top:5px;color:#555}
-main{padding:18px 14px 50px}.layout{display:grid;grid-template-columns:1.35fr .65fr;gap:18px}
-.card{background:white;border:1px solid #e5e5ea;border-radius:16px;padding:18px;box-shadow:0 5px 18px #0000000a}
-h2{font-size:18px;margin:0 0 14px}.drop{border:2px dashed #d9a9c4;background:#fff8fc;border-radius:14px;padding:30px;text-align:center;cursor:pointer}
-.drop b{display:block;font-size:18px;margin-bottom:7px}.drop span{color:#777;font-size:13px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-top:11px}label{font-size:13px;font-weight:bold;display:block;margin-bottom:6px}
-input,select{width:100%;padding:11px;border:1px solid #ddd;border-radius:9px;background:#fff;font:inherit}
-.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}button{border:0;border-radius:9px;padding:10px 13px;font-weight:bold;cursor:pointer}
-.primary{background:#d85a9d;color:white}.green{background:#72ae8e;color:white}.gray{background:#eeeef2}.red{background:#fff0ef;color:#c74642}
-.filelist{margin-top:15px;display:grid;gap:9px}.file{display:grid;grid-template-columns:68px 1fr auto;align-items:center;gap:10px;border:1px solid #e4e4e8;border-radius:12px;padding:9px;background:#fff}
-.thumb{width:58px;height:58px;border-radius:8px;background:#f0eff3;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#777;font-weight:bold;font-size:12px}
-.thumb img{width:100%;height:100%;object-fit:cover}.filename{font-weight:bold;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.meta{font-size:12px;color:#777;margin-top:4px}
-.actions{display:flex;gap:5px}.actions button{padding:7px 9px}.empty{text-align:center;padding:22px;color:#999}
-.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}.statbox{background:#faf9fb;padding:13px;border-radius:10px}.statbox b{display:block;font-size:21px}
-.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:10px;border-bottom:1px solid #eee;text-align:left;white-space:nowrap}
-.toast{position:fixed;right:16px;bottom:16px;background:#222;color:#fff;padding:12px 16px;border-radius:10px;display:none;z-index:50}
-.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:15px;z-index:40}.modalbox{background:white;width:min(1000px,100%);height:min(90vh,850px);border-radius:14px;padding:12px;display:flex;flex-direction:column}.modalhead{display:flex;justify-content:space-between;align-items:center}.modal iframe{border:0;flex:1;margin-top:8px}
-.note{font-size:12px;color:#777;margin-top:8px}
-@media(max-width:850px){.layout{grid-template-columns:1fr}.row{grid-template-columns:1fr}.file{grid-template-columns:58px 1fr}.actions{grid-column:2}.stat{grid-template-columns:1fr 1fr}}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f6f7fb;color:#24232a}header{background:linear-gradient(135deg,#f7c5dc,#cfeede);padding:18px 16px;border-bottom:1px solid #ddd}.container{max-width:1200px;margin:auto}.brand{font-size:23px;font-weight:800}.sub{margin-top:5px;color:#555}.userbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}.main{padding:18px 14px 50px}.layout{display:grid;grid-template-columns:1.35fr .65fr;gap:18px}.card{background:#fff;border:1px solid #e5e5ea;border-radius:16px;padding:18px;box-shadow:0 5px 18px #0000000a;margin-bottom:18px}h2{font-size:18px;margin:0 0 14px}.drop{border:2px dashed #d9a9c4;background:#fff8fc;border-radius:14px;padding:30px;text-align:center;cursor:pointer}.drop b{display:block;font-size:18px;margin-bottom:7px}.drop span{color:#777;font-size:13px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-top:11px}label{font-size:13px;font-weight:bold;display:block;margin-bottom:6px}input,select{width:100%;padding:11px;border:1px solid #ddd;border-radius:9px;background:#fff;font:inherit}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}button{border:0;border-radius:9px;padding:10px 13px;font-weight:bold;cursor:pointer}.primary{background:#d85a9d;color:#fff}.green{background:#72ae8e;color:#fff}.gray{background:#eeeef2}.red{background:#fff0ef;color:#c74642}.filelist{margin-top:15px;display:grid;gap:9px}.file{display:grid;grid-template-columns:68px 1fr auto;align-items:center;gap:10px;border:1px solid #e4e4e8;border-radius:12px;padding:9px}.thumb{width:58px;height:58px;border-radius:8px;background:#f0eff3;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#777;font-weight:bold;font-size:12px}.thumb img{width:100%;height:100%;object-fit:cover}.filename{font-weight:bold;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.meta,.note{font-size:12px;color:#777;margin-top:4px}.actions{display:flex;gap:5px}.actions button{padding:7px 9px}.empty{text-align:center;padding:22px;color:#999}.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}.statbox{background:#faf9fb;padding:13px;border-radius:10px}.statbox b{display:block;font-size:21px}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:10px;border-bottom:1px solid #eee;text-align:left;white-space:nowrap}.toast{position:fixed;right:16px;bottom:16px;background:#222;color:#fff;padding:12px 16px;border-radius:10px;display:none;z-index:150}.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:15px;z-index:120}.modalbox{background:#fff;width:min(1000px,100%);height:min(90vh,850px);border-radius:14px;padding:12px;display:flex;flex-direction:column}.modalhead{display:flex;justify-content:space-between;align-items:center}.modal iframe{border:0;flex:1;margin-top:8px}.login{position:fixed;inset:0;background:#f6f7fb;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}.loginbox{background:#fff;width:min(420px,100%);padding:28px;border-radius:20px;box-shadow:0 10px 35px #0002}.loginlogo{font-size:28px;font-weight:800;margin-bottom:5px}.loginmsg{min-height:20px;color:#c74642;font-size:13px;margin-top:10px}.adminpanel{display:none}.badge{display:inline-block;padding:5px 8px;border-radius:20px;background:#eeeef2;font-size:12px;font-weight:bold}.active{background:#e4f5eb;color:#317450}.inactive{background:#fff0ef;color:#a83e39}@media(max-width:850px){.layout{grid-template-columns:1fr}.row{grid-template-columns:1fr}.file{grid-template-columns:58px 1fr}.actions{grid-column:2}.stat{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-<header><div class="container"><div class="brand">📁 Document Combine Manager V3 Firebase</div><div class="sub">PDF + foto → atur urutan → combine → preview → download</div></div></header>
-
-<main class="container">
-<div class="layout">
-<section class="card">
-<h2>1. Upload PDF / Foto</h2>
-<div class="drop" id="dropZone">
-<b>📤 Klik di sini atau drag & drop</b>
-<div>PDF • JPG • JPEG • PNG</div>
-<span>Bisa pilih banyak file sekaligus</span>
-<input id="fileInput" type="file" accept="application/pdf,image/jpeg,image/png,.pdf,.jpg,.jpeg,.png" multiple hidden>
-</div>
-
-<div class="row">
-<div class="field"><label>Branch</label><select id="branchSelect"></select></div>
-<div class="field"><label>Tanggal</label><input id="docDate" type="date"></div>
-</div>
-<div class="row">
-<div class="field"><label>Nama PDF hasil</label><input id="docName" placeholder="Contoh: Rekap_AEON_BSD"></div>
-<div class="field"><label>Nama branch baru</label><input id="newBranch" placeholder="Contoh: AEON BSD"></div>
-</div>
-<div class="buttons">
-<button class="gray" id="addBranchBtn">＋ Tambah Branch</button>
-<button class="primary" id="combineBtn">🔗 Combine PDF</button>
-<button class="gray" id="clearBtn">🧹 Bersihkan</button>
-</div>
-<div id="fileList" class="filelist"><div class="empty">Belum ada file.</div></div>
-</section>
-
-<aside class="card">
-<h2>2. Filter Riwayat</h2>
-<div class="field"><label>Dari tanggal</label><input id="filterFrom" type="date"></div>
-<div class="field"><label>Sampai tanggal</label><input id="filterTo" type="date"></div>
-<div class="field"><label>Branch</label><select id="filterBranch"></select></div>
-<div class="field"><label>Search</label><input id="filterSearch" placeholder="Cari nama PDF / branch"></div>
-<div class="buttons"><button class="green" id="exportBtn">📊 Export Excel</button></div>
-<div class="stat">
-<div class="statbox"><b id="statDocs">0</b><span class="note">Dokumen</span></div>
-<div class="statbox"><b id="statBranches">0</b><span class="note">Branch</span></div>
-<div class="statbox"><b id="statFiles">0</b><span class="note">Total file</span></div>
-</div>
-</aside>
-</div>
-
-<section class="card" style="margin-top:18px">
-<h2>3. Riwayat Dokumen</h2>
-<div class="tablewrap">
-<table class="table"><thead><tr><th>Tanggal</th><th>Branch</th><th>Nama PDF</th><th>File</th><th>Aksi</th></tr></thead>
-<tbody id="historyBody"></tbody></table>
-</div>
-</section>
+<div id="loginScreen" class="login"><div class="loginbox"><div class="loginlogo">📁 Document Combine</div><div style="color:#666;margin-bottom:18px">Login cukup pakai ID & Password</div><div class="field"><label>ID</label><input id="loginId" autocomplete="username" placeholder="Contoh: rifki"></div><div class="field"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Contoh: rifki123"></div><button id="loginBtn" class="primary" style="width:100%;margin-top:15px">🔐 Login</button><div id="loginMsg" class="loginmsg"></div><div class="note">Akun awal: <b>rifki</b> / <b>rifki123</b></div></div></div>
+<header><div class="container"><div class="brand">📁 Document Combine Manager V5</div><div class="sub">PDF + foto → atur urutan → combine → preview → download</div><div class="userbar"><span id="userInfo" class="note"></span><div class="buttons" style="margin:0"><button id="accountBtn" class="gray">👤 Akun</button><button id="logoutBtn" class="gray">Keluar</button></div></div></div></header>
+<main class="main container">
+<section id="adminPanel" class="card adminpanel"><h2>⚙️ Kelola Akun</h2><div class="row"><div class="field"><label>Nama</label><input id="newUserName" placeholder="Nama pengguna"></div><div class="field"><label>ID Login</label><input id="newUserId" placeholder="contoh: andi"></div></div><div class="row"><div class="field"><label>Password</label><input id="newUserPass" type="password" placeholder="contoh: andi123"></div><div class="field"><label>Role</label><select id="newUserRole"><option value="staff">Staff</option><option value="viewer">Viewer</option><option value="admin">Admin</option></select></div></div><div class="buttons"><button id="createUserBtn" class="primary">＋ Tambah Akun</button></div><div class="tablewrap" style="margin-top:14px"><table class="table"><thead><tr><th>Nama</th><th>ID</th><th>Role</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="usersBody"></tbody></table></div></section>
+<div class="layout"><section class="card"><h2>1. Upload PDF / Foto</h2><div class="drop" id="dropZone"><b>📤 Klik di sini atau drag & drop</b><div>PDF • JPG • JPEG • PNG</div><span>Bisa pilih banyak file sekaligus</span><input id="fileInput" type="file" accept="application/pdf,image/jpeg,image/png,.pdf,.jpg,.jpeg,.png" multiple hidden></div><div class="row"><div class="field"><label>Branch</label><select id="branchSelect"></select></div><div class="field"><label>Tanggal</label><input id="docDate" type="date"></div></div><div class="row"><div class="field"><label>Nama PDF hasil</label><input id="docName" placeholder="Contoh: Rekap_AEON_BSD"></div><div class="field"><label>Nama branch baru</label><input id="newBranch" placeholder="Contoh: AEON BSD"></div></div><div class="buttons"><button class="gray" id="addBranchBtn">＋ Tambah Branch</button><button class="gray" id="editBranchBtn">✏️ Edit Branch</button><button class="red" id="deleteBranchBtn">🗑️ Hapus Branch</button><button class="primary" id="combineBtn">🔗 Combine PDF</button><button class="gray" id="clearBtn">🧹 Bersihkan</button></div><div id="fileList" class="filelist"><div class="empty">Belum ada file.</div></div></section>
+<aside class="card"><h2>2. Filter Riwayat</h2><div class="field"><label>Dari tanggal</label><input id="filterFrom" type="date"></div><div class="field"><label>Sampai tanggal</label><input id="filterTo" type="date"></div><div class="field"><label>Branch</label><select id="filterBranch"></select></div><div class="field"><label>Search</label><input id="filterSearch" placeholder="Cari nama PDF / branch"></div><div class="buttons"><button class="green" id="exportBtn">📊 Export Excel</button></div><div class="stat"><div class="statbox"><b id="statDocs">0</b><span class="note">Dokumen</span></div><div class="statbox"><b id="statBranches">0</b><span class="note">Branch</span></div><div class="statbox"><b id="statFiles">0</b><span class="note">Total file</span></div></div></aside></div>
+<section class="card"><h2>3. Riwayat Dokumen</h2><div class="tablewrap"><table class="table"><thead><tr><th>Tanggal</th><th>Branch</th><th>Nama PDF</th><th>File</th><th>Dibuat oleh</th><th>Aksi</th></tr></thead><tbody id="historyBody"></tbody></table></div></section>
 </main>
-
-<div class="modal" id="previewModal"><div class="modalbox"><div class="modalhead"><b id="previewTitle">Preview</b><button class="gray" id="closePreview">Tutup</button></div><iframe id="previewFrame"></iframe></div></div>
-<div class="toast" id="toast"></div>
-
-<body>
-<header><div class="container"><div class="brand">📁 Document Combine Manager V3 Firebase</div><div class="sub">PDF + foto → atur urutan → combine → preview → download</div></div></header>
-
-<main class="container">
-<div class="layout">
-<section class="card">
-<h2>1. Upload PDF / Foto</h2>
-<div class="drop" id="dropZone">
-<b>📤 Klik di sini atau drag & drop</b>
-<div>PDF • JPG • JPEG • PNG</div>
-<span>Bisa pilih banyak file sekaligus</span>
-<input id="fileInput" type="file" accept="application/pdf,image/jpeg,image/png,.pdf,.jpg,.jpeg,.png" multiple hidden>
-</div>
-
-<div class="row">
-<div class="field"><label>Branch</label><select id="branchSelect"></select></div>
-<div class="field"><label>Tanggal</label><input id="docDate" type="date"></div>
-</div>
-<div class="row">
-<div class="field"><label>Nama PDF hasil</label><input id="docName" placeholder="Contoh: Rekap_AEON_BSD"></div>
-<div class="field"><label>Nama branch baru</label><input id="newBranch" placeholder="Contoh: AEON BSD"></div>
-</div>
-<div class="buttons">
-<button class="gray" id="addBranchBtn">＋ Tambah Branch</button>
-<button class="primary" id="combineBtn">🔗 Combine PDF</button>
-<button class="gray" id="clearBtn">🧹 Bersihkan</button>
-</div>
-<div id="fileList" class="filelist"><div class="empty">Belum ada file.</div></div>
-</section>
-
-<aside class="card">
-<h2>2. Filter Riwayat</h2>
-<div class="field"><label>Dari tanggal</label><input id="filterFrom" type="date"></div>
-<div class="field"><label>Sampai tanggal</label><input id="filterTo" type="date"></div>
-<div class="field"><label>Branch</label><select id="filterBranch"></select></div>
-<div class="field"><label>Search</label><input id="filterSearch" placeholder="Cari nama PDF / branch"></div>
-<div class="buttons"><button class="green" id="exportBtn">📊 Export Excel</button></div>
-<div class="stat">
-<div class="statbox"><b id="statDocs">0</b><span class="note">Dokumen</span></div>
-<div class="statbox"><b id="statBranches">0</b><span class="note">Branch</span></div>
-<div class="statbox"><b id="statFiles">0</b><span class="note">Total file</span></div>
-</div>
-</aside>
-</div>
-
-<section class="card" style="margin-top:18px">
-<h2>3. Riwayat Dokumen</h2>
-<div class="tablewrap">
-<table class="table"><thead><tr><th>Tanggal</th><th>Branch</th><th>Nama PDF</th><th>File</th><th>Aksi</th></tr></thead>
-<tbody id="historyBody"></tbody></table>
-</div>
-</section>
-</main>
-
-<div class="modal" id="previewModal"><div class="modalbox"><div class="modalhead"><b id="previewTitle">Preview</b><button class="gray" id="closePreview">Tutup</button></div><iframe id="previewFrame"></iframe></div></div>
-<div class="toast" id="toast"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
-
+<div class="modal" id="previewModal"><div class="modalbox"><div class="modalhead"><b id="previewTitle">Preview</b><button class="gray" id="closePreview">Tutup</button></div><iframe id="previewFrame"></iframe></div></div><div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script><script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script><script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script>
-(function(){
-'use strict';
-const $=id=>document.getElementById(id);
-const today=new Date(),isoToday=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
-let pending=[],records=[],branches=[],users=[],currentUser=null,currentProfile=null,branchUnsub=null,recordUnsub=null,userUnsub=null;
-let db=null,storage=null,auth=null,secondaryApp=null;
-const firebaseConfig={apiKey:"AIzaSyBuKjG80eGqMndimmUcrwgnb0FYi1bjr5I",authDomain:"internaldochoki.firebaseapp.com",projectId:"internaldochoki",storageBucket:"internaldochoki.firebasestorage.app",messagingSenderId:"391358235359",appId:"1:391358235359:web:6bec021bf7292b00275f6a",measurementId:"G-NEFNDBSZ4Q"};
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function toast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',2500);}
-function fmt(n){return n<1024*1024?(n/1024).toFixed(0)+' KB':(n/1024/1024).toFixed(2)+' MB';}
-function id(){return Date.now().toString(36)+'_'+Math.random().toString(36).slice(2);}
-function isAdmin(){return currentProfile?.role==='admin'}
-function canEdit(){return ['admin','staff'].includes(currentProfile?.role)}
-function setVisible(el,show){if(el)el.style.display=show?'':'none'}
-
-function friendlyAuth(e){
- const c=e?.code||'';
- if(c==='auth/operation-not-allowed') return 'Email/Password belum diaktifkan di Firebase Authentication. Buka Firebase Console → Authentication → Sign-in method → Email/Password → Enable.';
- if(c==='auth/email-already-in-use') return 'Email sudah terdaftar. Gunakan Login.';
- if(c==='auth/invalid-email') return 'Format email tidak valid.';
- if(c==='auth/weak-password') return 'Password terlalu lemah. Gunakan minimal 6 karakter.';
- if(c==='auth/network-request-failed') return 'Koneksi internet bermasalah.';
- if(c==='auth/too-many-requests') return 'Terlalu banyak percobaan. Coba lagi beberapa saat.';
- return e?.message||'Terjadi kesalahan Firebase.';
-}
-function injectAuthUI(){
- const h=document.createElement('div');h.id='authOverlay';h.style.cssText='position:fixed;inset:0;background:#f6f7fb;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px';
- h.innerHTML=`<div style="background:#fff;width:min(430px,100%);padding:28px;border-radius:18px;box-shadow:0 8px 30px #0001">
- <div style="font-size:24px;font-weight:800;margin-bottom:5px">🔐 Login</div><div style="color:#666;margin-bottom:18px">Document Combine Manager</div>
- <input id="loginEmail" type="email" placeholder="Email" style="margin-bottom:10px"><input id="loginPass" type="password" placeholder="Password" style="margin-bottom:10px">
- <button id="loginBtn" class="primary" style="width:100%">Masuk</button><button id="firstAdminBtn" class="gray" style="width:100%;margin-top:8px">Buat Admin Pertama</button>
- <div id="loginMsg" class="note" style="margin-top:10px"></div></div>`;document.body.appendChild(h);
- $('loginBtn').onclick=async()=>{try{await auth.signInWithEmailAndPassword($('loginEmail').value.trim(),$('loginPass').value);$('loginMsg').textContent=''}catch(e){$('loginMsg').textContent=e.message}};
- $('firstAdminBtn').onclick=async()=>{const email=$('loginEmail').value.trim(),pass=$('loginPass').value;if(!email||!pass){$('loginMsg').textContent='Isi email dan password dulu';return}
- try{
-  const test=await db.collection('users').limit(1).get();
-  if(!test.empty){$('loginMsg').textContent='Admin pertama sudah dibuat. Silakan Login.';return;}
-  const cred=await auth.createUserWithEmailAndPassword(email,pass);
-  await db.collection('users').doc(cred.user.uid).set({uid:cred.user.uid,email,name:email.split('@')[0],role:'admin',active:true,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
-  $('loginMsg').textContent='Admin berhasil dibuat. Anda otomatis login sebagai Admin.';
-}catch(e){$('loginMsg').textContent='Gagal daftar: '+friendlyAuth(e)}};
-}
-function injectManagement(){
- const header=document.querySelector('header .container');
- header.insertAdjacentHTML('beforeend',`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap"><span id="userInfo" class="note"></span><div class="buttons" style="margin:0"><button class="gray" id="accountBtn">👤 Akun</button><button class="gray" id="logoutBtn">Keluar</button></div></div>`);
- document.querySelector('#addBranchBtn').insertAdjacentHTML('afterend','<button class="gray" id="editBranchBtn">✏️ Edit Branch</button><button class="red" id="deleteBranchBtn">🗑️ Hapus Branch</button>');
- document.querySelector('main').insertAdjacentHTML('afterbegin',`<section class="card" id="adminPanel" style="display:none;margin-bottom:18px"><h2>⚙️ Kelola Akun</h2><div class="row"><div class="field"><label>Nama</label><input id="newUserName" placeholder="Nama pengguna"></div><div class="field"><label>Email akun baru</label><input id="newUserEmail" type="email" placeholder="staff@email.com"></div></div><div class="row"><div class="field"><label>Password</label><input id="newUserPass" type="password" placeholder="Minimal 6 karakter"></div><div class="field"><label>Role</label><select id="newUserRole"><option value="staff">Staff</option><option value="viewer">Viewer</option><option value="admin">Admin</option></select></div><div class="field"><label>Status</label><select id="newUserActive"><option value="true">Aktif</option><option value="false">Nonaktif</option></select></div></div><div class="buttons"><button class="primary" id="createUserBtn">＋ Tambah Akun</button></div><div class="tablewrap" style="margin-top:12px"><table class="table"><thead><tr><th>Email</th><th>Role</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="usersBody"></tbody></table></div></section>`);
- $('logoutBtn').onclick=()=>auth.signOut();$('accountBtn').onclick=()=>{$('adminPanel').style.display=isAdmin()?'block':'none';if(isAdmin())$('adminPanel').scrollIntoView({behavior:'smooth'})};
- $('editBranchBtn').onclick=editBranch;$('deleteBranchBtn').onclick=deleteBranch;$('createUserBtn').onclick=createUser;
-}
-function refreshBranches(){ $('branchSelect').innerHTML=branches.map(b=>`<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');$('filterBranch').innerHTML='<option value="">Semua Branch</option>'+branches.map(b=>`<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');}
-function renderPending(){const box=$('fileList');if(!pending.length){box.innerHTML='<div class="empty">Belum ada file.</div>';return}box.innerHTML=pending.map((x,i)=>`<div class="file" draggable="true" data-id="${x.id}"><div class="thumb">${x.file.type.startsWith('image/')?`<img src="${x.preview}">`:'PDF'}</div><div><div class="filename">${esc(x.file.name)}</div><div class="meta">${fmt(x.file.size)} • urutan ${i+1}</div></div><div class="actions"><button class="gray" data-act="up">↑</button><button class="gray" data-act="down">↓</button><button class="red" data-act="remove">✕</button></div></div>`).join('');
- box.querySelectorAll('.file').forEach(el=>{const x=el.dataset.id;el.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',x));el.addEventListener('dragover',e=>e.preventDefault());el.addEventListener('drop',e=>{e.preventDefault();reorder(e.dataTransfer.getData('text/plain'),x)});el.querySelector('[data-act="up"]').onclick=()=>move(x,-1);el.querySelector('[data-act="down"]').onclick=()=>move(x,1);el.querySelector('[data-act="remove"]').onclick=()=>{pending=pending.filter(z=>z.id!==x);renderPending()}})}
-function move(x,d){const i=pending.findIndex(z=>z.id===x),j=i+d;if(i<0||j<0||j>=pending.length)return;[pending[i],pending[j]]=[pending[j],pending[i]];renderPending()}
-function reorder(a,b){const i=pending.findIndex(z=>z.id===a),j=pending.findIndex(z=>z.id===b);if(i<0||j<0||i===j)return;const x=pending.splice(i,1)[0];pending.splice(j,0,x);renderPending()}
-function addFiles(list){const ok=list.filter(f=>f.type==='application/pdf'||f.type==='image/jpeg'||f.type==='image/png'||/\.(pdf|jpe?g|png)$/i.test(f.name));if(!ok.length){toast('File harus PDF, JPG, JPEG atau PNG');return}ok.forEach(f=>pending.push({id:id(),file:f,preview:f.type.startsWith('image/')?URL.createObjectURL(f):null}));renderPending();$('fileInput').value='';toast(ok.length+' file berhasil ditambahkan')}
-async function imageAsPdf(file){const src=await PDFLib.PDFDocument.create(),bytes=await file.arrayBuffer(),image=file.type==='image/png'?await src.embedPng(bytes):await src.embedJpg(bytes),page=src.addPage([595.28,841.89]),m=25,maxW=page.getWidth()-m*2,maxH=page.getHeight()-m*2,s=Math.min(maxW/image.width,maxH/image.height),w=image.width*s,h=image.height*s;page.drawImage(image,{x:(page.getWidth()-w)/2,y:(page.getHeight()-h)/2,width:w,height:h});return src}
-async function buildPdf(){if(!window.PDFLib)throw Error('Library PDF belum termuat');const out=await PDFLib.PDFDocument.create();for(const item of pending){const src=item.file.type==='application/pdf'||/\.pdf$/i.test(item.file.name)?await PDFLib.PDFDocument.load(await item.file.arrayBuffer()):await imageAsPdf(item.file);(await out.copyPages(src,src.getPageIndices())).forEach(p=>out.addPage(p))}return out.save()}
-function downloadBlob(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500)}
-async function combine(){if(!canEdit()){toast('Akun Viewer hanya bisa melihat data');return}if(!pending.length){toast('Upload PDF/foto dulu bro');return}const branch=$('branchSelect').value,date=$('docDate').value||isoToday;let name=($('docName').value.trim()||branch+'_'+date).replace(/\.pdf$/i,'')+'.pdf';const btn=$('combineBtn');btn.disabled=true;btn.textContent='⏳ Memproses...';try{const bytes=await buildPdf();const blob=new Blob([bytes],{type:'application/pdf'});const ref=storage.ref().child('documents/'+currentUser.uid+'/'+Date.now()+'_'+name);await ref.put(blob,{contentType:'application/pdf'});const url=await ref.getDownloadURL();await db.collection('documents').add({date,branch,name,fileCount:pending.length,storagePath:ref.fullPath,url,createdBy:currentUser.uid,createdByEmail:currentUser.email,createdAt:firebase.firestore.FieldValue.serverTimestamp()});downloadBlob(blob,name);toast('PDF berhasil dibuat & disimpan ke Firebase');}catch(e){console.error(e);toast('Gagal combine: '+e.message)}finally{btn.disabled=false;btn.textContent='🔗 Combine PDF'}}
-function filtered(){const f=$('filterFrom').value,t=$('filterTo').value,b=$('filterBranch').value,q=$('filterSearch').value.toLowerCase().trim();return records.filter(r=>(!f||r.date>=f)&&(!t||r.date<=t)&&(!b||r.branch===b)&&(!q||r.name.toLowerCase().includes(q)||r.branch.toLowerCase().includes(q)))}
-function renderHistory(){const rows=filtered();$('historyBody').innerHTML=rows.length?rows.map(r=>`<tr><td>${esc(r.date)}</td><td>${esc(r.branch)}</td><td>${esc(r.name)}</td><td>${r.fileCount} file</td><td><button class="gray" data-preview="${r.id}">👁️ Preview</button> <button class="green" data-download="${r.id}">⬇️ PDF</button> ${isAdmin()?`<button class="red" data-delete="${r.id}">🗑️</button>`:''}</td></tr>`).join(''):'<tr><td colspan="5" class="empty">Belum ada dokumen.</td></tr>';$('statDocs').textContent=rows.length;$('statBranches').textContent=new Set(rows.map(r=>r.branch)).size;$('statFiles').textContent=rows.reduce((n,r)=>n+r.fileCount,0);rows.forEach(r=>{document.querySelector(`[data-preview="${r.id}"]`).onclick=()=>preview(r);document.querySelector(`[data-download="${r.id}"]`).onclick=()=>window.open(r.url,'_blank');const del=document.querySelector(`[data-delete="${r.id}"]`);if(del)del.onclick=()=>deleteDoc(r)})}
-async function deleteDoc(r){if(!confirm('Hapus dokumen ini?'))return;try{if(r.storagePath)await storage.ref(r.storagePath).delete();await db.collection('documents').doc(r.id).delete();toast('Dokumen dihapus')}catch(e){toast('Gagal hapus: '+e.message)}}
-function preview(r){$('previewTitle').textContent=r.name;$('previewFrame').src=r.url;$('previewModal').style.display='flex'}
-async function addBranch(){if(!isAdmin()){toast('Hanya Admin yang bisa mengelola branch');return}const name=$('newBranch').value.trim();if(!name)return toast('Isi nama branch dulu');if(branches.some(b=>b.name.toLowerCase()===name.toLowerCase()))return toast('Branch sudah ada');await db.collection('branches').add({name,active:true,createdAt:firebase.firestore.FieldValue.serverTimestamp()});$('newBranch').value='';toast('Branch berhasil ditambahkan')}
-async function editBranch(){if(!isAdmin())return toast('Hanya Admin');const old=$('branchSelect').value;if(!old)return;const b=branches.find(x=>x.name===old);const name=prompt('Edit nama branch:',old);if(!name||name.trim()===old)return;if(branches.some(x=>x.name.toLowerCase()===name.trim().toLowerCase()))return toast('Branch sudah ada');await db.collection('branches').doc(b.id).update({name:name.trim(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()});toast('Branch berhasil diedit')}
-async function deleteBranch(){if(!isAdmin())return toast('Hanya Admin');const name=$('branchSelect').value,b=branches.find(x=>x.name===name);if(!b)return;if(!confirm('Hapus branch '+name+'?'))return;await db.collection('branches').doc(b.id).delete();toast('Branch dihapus')}
-async function createUser(){
- if(!isAdmin())return;
- const name=$('newUserName').value.trim(),email=$('newUserEmail').value.trim(),pass=$('newUserPass').value,role=$('newUserRole').value,active=$('newUserActive').value==='true';
- if(!email||pass.length<6)return toast('Email valid dan password minimal 6 karakter wajib diisi');
- try{
-   if(!secondaryApp)secondaryApp=firebase.initializeApp(firebaseConfig,'secondary');
-   const secAuth=secondaryApp.auth();
-   const cred=await secAuth.createUserWithEmailAndPassword(email,pass);
-   await db.collection('users').doc(cred.user.uid).set({uid:cred.user.uid,email,name:name||email.split('@')[0],role,active,createdAt:firebase.firestore.FieldValue.serverTimestamp(),createdBy:currentUser.uid});
-   await secAuth.signOut();
-   toast('Akun berhasil dibuat');
-   $('newUserName').value='';$('newUserEmail').value='';$('newUserPass').value='';
- }catch(e){toast('Gagal buat akun: '+friendlyAuth(e))}
-}
-async function toggleUser(uid,active){if(!isAdmin())return;await db.collection('users').doc(uid).update({active:!active});toast('Status akun diperbarui')}
-async function deleteUser(uid){if(!isAdmin()||uid===currentUser.uid)return;if(!confirm('Hapus profil akun ini? Credential Auth tidak bisa dihapus aman dari browser tanpa Admin SDK/Cloud Function.'))return;await db.collection('users').doc(uid).delete();toast('Profil akun dihapus')}
-function renderUsers(){if(!isAdmin()){setVisible($('adminPanel'),false);return}setVisible($('adminPanel'),true);$('usersBody').innerHTML=users.map(u=>`<tr><td>${esc(u.email)}</td><td>${esc(u.role)}</td><td>${u.active?'Aktif':'Nonaktif'}</td><td><button class="gray" data-toggle="${u.id}">${u.active?'Nonaktifkan':'Aktifkan'}</button> <button class="red" data-udel="${u.id}">🗑️</button></td></tr>`).join('');users.forEach(u=>{const a=document.querySelector(`[data-toggle="${u.id}"]`);if(a)a.onclick=()=>toggleUser(u.id,u.active);const d=document.querySelector(`[data-udel="${u.id}"]`);if(d)d.onclick=()=>deleteUser(u.id)})}
-function subscribe(){branchUnsub=db.collection('branches').orderBy('name').onSnapshot(s=>{branches=s.docs.map(d=>({id:d.id,...d.data()}));refreshBranches();$('statBranches').textContent=branches.length},e=>toast('Branch Firebase: '+e.message));recordUnsub=db.collection('documents').orderBy('createdAt','desc').onSnapshot(s=>{records=s.docs.map(d=>({id:d.id,...d.data()}));renderHistory()},e=>toast('Dokumen Firebase: '+e.message));userUnsub=db.collection('users').orderBy('email').onSnapshot(s=>{users=s.docs.map(d=>({id:d.id,...d.data()}));renderUsers()},e=>toast('Akun Firebase: '+e.message))}
-function initApp(){firebase.initializeApp(firebaseConfig);auth=firebase.auth();db=firebase.firestore();storage=firebase.storage();injectAuthUI();injectManagement();$('docDate').value=isoToday;['filterFrom','filterTo','filterBranch','filterSearch'].forEach(x=>$(x).addEventListener('input',renderHistory));$('dropZone').onclick=()=>$('fileInput').click();$('fileInput').onchange=e=>addFiles([...e.target.files]);['dragenter','dragover'].forEach(ev=>$('dropZone').addEventListener(ev,e=>{e.preventDefault();e.stopPropagation()}));$('dropZone').ondrop=e=>{e.preventDefault();e.stopPropagation();addFiles([...e.dataTransfer.files])};$('addBranchBtn').onclick=addBranch;$('clearBtn').onclick=()=>{pending=[];renderPending();$('docName').value='';toast('Upload dibersihkan')};$('combineBtn').onclick=combine;$('closePreview').onclick=()=>{$('previewModal').style.display='none';$('previewFrame').src=''};$('exportBtn').onclick=()=>{const rows=filtered();if(!rows.length)return toast('Tidak ada data');if(!window.XLSX)return toast('Library Excel belum termuat');const data=rows.map((r,i)=>({'No':i+1,'Tanggal':r.date,'Branch':r.branch,'Nama PDF':r.name,'Jumlah File':r.fileCount,'Dibuat Oleh':r.createdByEmail||''}));const wb=XLSX.utils.book_new(),ws=XLSX.utils.json_to_sheet(data);XLSX.utils.book_append_sheet(wb,ws,'Dokumen');XLSX.writeFile(wb,'Rekap_Dokumen.xlsx')};renderPending();auth.onAuthStateChanged(async u=>{currentUser=u;if(!u){currentProfile=null;document.body.style.overflow='hidden';$('authOverlay').style.display='flex';return}try{const snap=await db.collection('users').doc(u.uid).get();if(!snap.exists){await db.collection('users').doc(u.uid).set({email:u.email,role:'viewer',active:true,createdAt:firebase.firestore.FieldValue.serverTimestamp()});currentProfile={email:u.email,role:'viewer',active:true}}else currentProfile=snap.data();if(currentProfile.active===false){await auth.signOut();return}document.body.style.overflow='auto';$('authOverlay').style.display='none';$('userInfo').textContent=`${u.email} • ${currentProfile.role}`;subscribe()}catch(e){toast('Gagal memuat profil: '+e.message)}})}
-initApp();
+(function(){'use strict';
+const $=id=>document.getElementById(id);const cfg={apiKey:'AIzaSyBuKjG80GqMndimmUcrwgnb0FYi1bjr5I',authDomain:'internaldochoki.firebaseapp.com',projectId:'internaldochoki',storageBucket:'internaldochoki.firebasestorage.app',messagingSenderId:'391358235359',appId:'1:391358235359:web:6bec021bf7292b00275f6a',measurementId:'G-NEFNDBSZ4Q'};
+const today=new Date(),isoToday=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);let db,pending=[],records=[],branches=[],users=[],currentUser=null,branchUnsub=null,recordUnsub=null,userUnsub=null;
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.x);toast.x=setTimeout(()=>t.style.display='none',2500)}function admin(){return currentUser?.role==='admin'}function editor(){return ['admin','staff'].includes(currentUser?.role)}
+async function hash(v){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function seedAdmin(){const s=await db.collection('users').where('id','==','rifki').limit(1).get();if(s.empty){await db.collection('users').add({id:'rifki',name:'Rifki',passwordHash:await hash('rifki123'),role:'admin',active:true,createdAt:firebase.firestore.FieldValue.serverTimestamp()})}}
+async function login(){const id=$('loginId').value.trim().toLowerCase(),pass=$('loginPassword').value;const msg=$('loginMsg');msg.textContent='';if(!id||!pass){msg.textContent='ID dan password wajib diisi.';return}try{const s=await db.collection('users').where('id','==',id).limit(1).get();if(s.empty){msg.textContent='ID atau password salah.';return}const d=s.docs[0],u={id:d.id,...d.data()};if(u.active===false){msg.textContent='Akun sedang nonaktif.';return}if(u.passwordHash!==await hash(pass)){msg.textContent='ID atau password salah.';return}currentUser=u;localStorage.setItem('dcm_user_id',d.id);$('loginScreen').style.display='none';$('userInfo').textContent=`Login: ${u.name||u.id} • ${u.role}`;applyRole();subscribe();toast('Login berhasil')}catch(e){console.error(e);msg.textContent='Gagal login: '+e.message}}
+function applyRole(){const a=admin();$('accountBtn').style.display=a?'':'none';$('adminPanel').style.display='none';$('editBranchBtn').style.display=a?'':'none';$('deleteBranchBtn').style.display=a?'':'none';$('addBranchBtn').style.display=a?'':'none';$('combineBtn').style.display=editor()?'':'none';$('dropZone').style.display=editor()?'':'none';$('clearBtn').style.display=editor()?'':'none'}
+async function createUser(){if(!admin())return;const name=$('newUserName').value.trim(),id=$('newUserId').value.trim().toLowerCase().replace(/\s+/g,''),pass=$('newUserPass').value,role=$('newUserRole').value;if(!name||!id||!pass){toast('Nama, ID dan password wajib diisi');return}if(pass.length<4){toast('Password minimal 4 karakter');return}if(!/^[a-z0-9._-]+$/.test(id)){toast('ID hanya boleh huruf, angka, titik, _ atau -');return}const exists=await db.collection('users').where('id','==',id).limit(1).get();if(!exists.empty){toast('ID sudah dipakai');return}await db.collection('users').add({id,name,passwordHash:await hash(pass),role,active:true,createdAt:firebase.firestore.FieldValue.serverTimestamp()});$('newUserName').value='';$('newUserId').value='';$('newUserPass').value='';toast('Akun '+id+' berhasil dibuat')}
+async function toggleUser(docId,active){if(!admin())return;await db.collection('users').doc(docId).update({active:!active});toast('Status akun diperbarui')}
+async function deleteUser(docId){if(!admin()||docId===currentUser.id)return;if(!confirm('Hapus akun ini?'))return;await db.collection('users').doc(docId).delete();toast('Akun dihapus')}
+function renderUsers(){if(!admin())return;$('usersBody').innerHTML=users.map(u=>`<tr><td>${esc(u.name)}</td><td>${esc(u.id)}</td><td>${esc(u.role)}</td><td><span class="badge ${u.active?'active':'inactive'}">${u.active?'Aktif':'Nonaktif'}</span></td><td><button class="gray" data-t="${u.docId}">${u.active?'Nonaktifkan':'Aktifkan'}</button> <button class="red" data-d="${u.docId}">🗑️</button></td></tr>`).join('');users.forEach(u=>{const t=document.querySelector(`[data-t="${u.docId}"]`);if(t)t.onclick=()=>toggleUser(u.docId,u.active);const d=document.querySelector(`[data-d="${u.docId}"]`);if(d)d.onclick=()=>deleteUser(u.docId)})}
+function subscribe(){if(branchUnsub)return;branchUnsub=db.collection('branches').orderBy('name').onSnapshot(s=>{branches=s.docs.map(d=>({docId:d.id,...d.data()}));refreshBranches()},e=>toast('Branch: '+e.message));recordUnsub=db.collection('documents').orderBy('createdAt','desc').onSnapshot(s=>{records=s.docs.map(d=>({docId:d.id,...d.data()}));renderHistory()},e=>toast('Dokumen: '+e.message));userUnsub=db.collection('users').orderBy('id').onSnapshot(s=>{users=s.docs.map(d=>({docId:d.id,...d.data()}));renderUsers()},e=>console.log(e.message))}
+function refreshBranches(){$('branchSelect').innerHTML=branches.length?branches.map(b=>`<option value="${esc(b.name)}">${esc(b.name)}</option>`).join(''):'<option value="">Belum ada branch</option>';$('filterBranch').innerHTML='<option value="">Semua Branch</option>'+branches.map(b=>`<option value="${esc(b.name)}">${esc(b.name)}</option>`).join('');$('statBranches').textContent=branches.length}
+async function addBranch(){if(!admin())return;const n=$('newBranch').value.trim();if(!n){toast('Isi nama branch dulu');return}const ex=await db.collection('branches').where('name','==',n).limit(1).get();if(!ex.empty){toast('Branch sudah ada');return}await db.collection('branches').add({name:n,createdAt:firebase.firestore.FieldValue.serverTimestamp()});$('newBranch').value='';toast('Branch ditambahkan')}
+async function editBranch(){if(!admin())return;const old=$('branchSelect').value;if(!old)return;const n=prompt('Nama branch baru:',old);if(!n||n.trim()===old)return;const s=await db.collection('branches').where('name','==',old).limit(1).get();if(!s.empty)await s.docs[0].ref.update({name:n.trim()});toast('Branch diperbarui')}
+async function deleteBranch(){if(!admin())return;const n=$('branchSelect').value;if(!n)return;if(!confirm('Hapus branch '+n+'?'))return;const s=await db.collection('branches').where('name','==',n).limit(1).get();if(!s.empty)await s.docs[0].ref.delete();toast('Branch dihapus')}
+function addFiles(list){const ok=[...list].filter(f=>f.type==='application/pdf'||f.type==='image/jpeg'||f.type==='image/png'||/\.(pdf|jpe?g|png)$/i.test(f.name));ok.forEach(f=>pending.push({id:Date.now()+Math.random(),file:f,preview:f.type.startsWith('image/')?URL.createObjectURL(f):null}));renderPending();$('fileInput').value=''}
+function renderPending(){const b=$('fileList');if(!pending.length){b.innerHTML='<div class="empty">Belum ada file.</div>';return}b.innerHTML=pending.map((x,i)=>`<div class="file"><div class="thumb">${x.preview?`<img src="${x.preview}">`:'PDF'}</div><div><div class="filename">${esc(x.file.name)}</div><div class="meta">${(x.file.size/1024).toFixed(0)} KB • urutan ${i+1}</div></div><div class="actions"><button class="gray" data-u="${x.id}">↑</button><button class="gray" data-d="${x.id}">↓</button><button class="red" data-r="${x.id}">✕</button></div></div>`).join('');pending.forEach(x=>{const u=document.querySelector(`[data-u="${x.id}"]`),d=document.querySelector(`[data-d="${x.id}"]`),r=document.querySelector(`[data-r="${x.id}"]`);u.onclick=()=>move(x.id,-1);d.onclick=()=>move(x.id,1);r.onclick=()=>{pending=pending.filter(z=>z.id!==x.id);renderPending()}})}
+function move(i,d){const x=pending.findIndex(z=>z.id===i),y=x+d;if(x<0||y<0||y>=pending.length)return;[pending[x],pending[y]]=[pending[y],pending[x]];renderPending()}
+async function imagePdf(f){const p=await PDFLib.PDFDocument.create(),b=await f.arrayBuffer(),im=f.type==='image/png'?await p.embedPng(b):await p.embedJpg(b),pg=p.addPage([595.28,841.89]),m=25,s=Math.min((pg.getWidth()-m*2)/im.width,(pg.getHeight()-m*2)/im.height),w=im.width*s,h=im.height*s;pg.drawImage(im,{x:(pg.getWidth()-w)/2,y:(pg.getHeight()-h)/2,width:w,height:h});return p}
+async function buildPdf(){const out=await PDFLib.PDFDocument.create();for(const x of pending){const src=x.file.type==='application/pdf'?await PDFLib.PDFDocument.load(await x.file.arrayBuffer()):await imagePdf(x.file);(await out.copyPages(src,src.getPageIndices())).forEach(p=>out.addPage(p))}return out.save()}
+function download(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+async function combine(){if(!editor())return toast('Akun ini tidak bisa membuat dokumen');if(!pending.length)return toast('Upload file dulu');const branch=$('branchSelect').value,date=$('docDate').value||isoToday;if(!branch)return toast('Tambah branch dulu');let name=($('docName').value.trim()||('Rekap_'+branch+'_'+date)).replace(/\.pdf$/i,'')+'.pdf';const btn=$('combineBtn');btn.disabled=true;try{const bytes=await buildPdf(),blob=new Blob([bytes],{type:'application/pdf'});download(blob,name);await db.collection('documents').add({date,branch,name,fileCount:pending.length,createdBy:currentUser.id,createdByName:currentUser.name,createdAt:firebase.firestore.FieldValue.serverTimestamp()});pending=[];renderPending();toast('PDF berhasil di-combine & di-download')}catch(e){console.error(e);toast('Gagal combine: '+e.message)}finally{btn.disabled=false}}
+function filtered(){const f=$('filterFrom').value,t=$('filterTo').value,b=$('filterBranch').value,q=$('filterSearch').value.trim().toLowerCase();return records.filter(r=>(!f||r.date>=f)&&(!t||r.date<=t)&&(!b||r.branch===b)&&(!q||String(r.name).toLowerCase().includes(q)||String(r.branch).toLowerCase().includes(q)))}
+function renderHistory(){const rows=filtered();$('statDocs').textContent=rows.length;$('statFiles').textContent=rows.reduce((a,r)=>a+(Number(r.fileCount)||0),0);$('historyBody').innerHTML=rows.length?rows.map(r=>`<tr><td>${esc(r.date)}</td><td>${esc(r.branch)}</td><td>${esc(r.name)}</td><td>${r.fileCount||0} file</td><td>${esc(r.createdByName||r.createdBy||'-')}</td><td>${admin()?`<button class="red" data-x="${r.docId}">🗑️ Hapus</button>`:'-'}</td></tr>`).join(''):'<tr><td colspan="6" class="empty">Belum ada dokumen.</td></tr>';rows.forEach(r=>{const x=document.querySelector(`[data-x="${r.docId}"]`);if(x)x.onclick=()=>deleteDoc(r)})}
+async function deleteDoc(r){if(!admin()||!confirm('Hapus riwayat dokumen ini?'))return;try{await db.collection('documents').doc(r.docId).delete();toast('Riwayat dihapus')}catch(e){toast('Gagal hapus: '+e.message)}}
+function exportExcel(){const rows=filtered().map(r=>({Tanggal:r.date,Branch:r.branch,Nama_PDF:r.name,Jumlah_File:r.fileCount,Dibuat_Oleh:r.createdByName||r.createdBy||''}));if(!rows.length)return toast('Tidak ada data untuk export');const ws=XLSX.utils.json_to_sheet(rows),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Riwayat');XLSX.writeFile(wb,'Rekap_Document_Combine.xlsx')}
+function clearAll(){pending=[];renderPending();$('docName').value=''}
+function logout(){currentUser=null;localStorage.removeItem('dcm_user_id');$('loginScreen').style.display='flex';$('loginId').value='';$('loginPassword').value='';if(branchUnsub)branchUnsub();if(recordUnsub)recordUnsub();if(userUnsub)userUnsub();branchUnsub=recordUnsub=userUnsub=null}
+async function init(){firebase.initializeApp(cfg);db=firebase.firestore();try{await seedAdmin()}catch(e){console.warn('Seed admin:',e.message)}$('docDate').value=isoToday;$('dropZone').onclick=()=>$('fileInput').click();$('fileInput').onchange=e=>addFiles(e.target.files);$('dropZone').ondragover=e=>{e.preventDefault()};$('dropZone').ondrop=e=>{e.preventDefault();addFiles(e.dataTransfer.files)};$('addBranchBtn').onclick=addBranch;$('editBranchBtn').onclick=editBranch;$('deleteBranchBtn').onclick=deleteBranch;$('combineBtn').onclick=combine;$('clearBtn').onclick=clearAll;$('exportBtn').onclick=exportExcel;['filterFrom','filterTo','filterBranch','filterSearch'].forEach(x=>$(x).addEventListener('input',renderHistory));$('closePreview').onclick=()=>{$('previewModal').style.display='none';$('previewFrame').src=''};$('loginBtn').onclick=login;$('loginPassword').addEventListener('keydown',e=>{if(e.key==='Enter')login()});$('accountBtn').onclick=()=>{if(admin()){$('adminPanel').style.display=$('adminPanel').style.display==='none'?'block':'none';$('adminPanel').scrollIntoView({behavior:'smooth'})}};$('logoutBtn').onclick=logout;$('createUserBtn').onclick=createUser;renderPending()}
+init();
 })();
-</script>
-</body>\n</html>
+</script></body></html>
